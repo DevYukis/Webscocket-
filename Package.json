@@ -1,10 +1,9 @@
 {
   "name": "websocket-server",
   "version": "1.0.0",
-  "description": "Servidor WebSocket com autenticação por token",
-  "main": "servidor.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node servidor.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
