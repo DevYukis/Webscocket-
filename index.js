@@ -107,9 +107,8 @@ server.on('upgrade', (request, socket, head) => {
 
 // Inicia o servidor
 server.listen(port, '0.0.0.0', () => {
-  const host = process.env.RAILWAY_STATIC_URL || ipAddress; // Usa o domínio público da Railway ou o IP local
-  const url = process.env.RAILWAY_STATIC_URL || `http://${host}:${port}`; // Detecta o domínio público da Railway
-  console.log(`Servidor WebSocket rodando em: ${url}`);
+  const publicUrl = process.env.RAILWAY_STATIC_URL || `http://${ipAddress}:${port}`; // Usa o domínio público da Railway ou o IP local
+  console.log(`Servidor WebSocket rodando em: ${publicUrl}`);
 });
 
 // Permite enviar mensagens do terminal para os clientes conectados
