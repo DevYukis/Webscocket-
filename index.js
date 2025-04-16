@@ -6,7 +6,7 @@ function isValidToken(token) {
   return token === process.env.TOKEN;
 }
 
-const port = process.argv[2] || 8080;
+const port = process.env.PORT || 8080; // Usa a porta fornecida pela Railway ou 8080 como fallback
 const server = http.createServer();
 const wss = new WebSocket.Server({ noServer: true });
 
