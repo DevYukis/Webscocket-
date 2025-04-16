@@ -6,7 +6,7 @@ function isValidToken(token) {
   return token === process.env.TOKEN;
 }
 
-const port = process.argv[2] || 8080;
+const port = process.env.PORT || 3000; // Porta fornecida pela Railway ou fallback para 3000
 const server = http.createServer();
 const wss = new WebSocket.Server({ noServer: true });
 
@@ -42,7 +42,7 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 server.listen(port, () => {
-  console.log(`Servidor WebSocket rodando na porta ${port}`);
+  console.log(`App listening on port: ${port}`);
 });
 
 process.stdin.on('data', (data) => {
