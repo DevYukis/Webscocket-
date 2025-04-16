@@ -27,7 +27,8 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ noServer: true });
 
-const port = process.env.PORT || 8080; // Usa a porta fornecida pela Railway ou 8080 como fallback
+const port = process.env.PORT || 8080; // Porta fornecida pela Railway ou fallback para 8080
+const publicUrl = process.env.RAILWAY_STATIC_URL || `http://${ipAddress}:${port}`; // Domínio público ou IP local
 
 // Middleware para logar requisições HTTPS
 app.use((req, res, next) => {
@@ -107,8 +108,7 @@ server.on('upgrade', (request, socket, head) => {
 
 // Inicia o servidor
 server.listen(port, '0.0.0.0', () => {
-  const publicUrl = process.env.RAILWAY_STATIC_URL || `http://${ipAddress}:${port}`; // Usa o domínio público da Railway ou o IP local
-  console.log(`Servidor WebSocket rodando em: ${publicUrl}`);
+  console.log(`Servidor rodando em: ${publicUrl}`);
 });
 
 // Permite enviar mensagens do terminal para os clientes conectados
