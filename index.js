@@ -1,6 +1,22 @@
 require('dotenv').config();
 const WebSocket = require('ws');
 const http = require('http');
+const os = require('os');
+
+// Detecta o IP da máquina
+const interfaces = os.networkInterfaces();
+let ipAddress = '127.0.0.1'; // fallback
+
+for (const name of Object.keys(interfaces)) {
+  for (const iface of interfaces[name]) {
+    if (iface.family === 'IPv4' && !iface.internal) {
+      ipAddress = iface.address;
+      break;
+    }
+  }
+}
+
+console.log(`IP da máquina: ${ipAddress}`);
 
 function isValidToken(token) {
   return token === process.env.TOKEN;
@@ -42,7 +58,7 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 server.listen(port, '0.0.0.0', () => {
-  const host = process.env.HOST || `localhost`; // Railway define o domínio automaticamente
+  const host = process.env.HOST || ipAddress; // Usa o IP detectado ou o domínio configurado
   const url = process.env.RAILWAY_STATIC_URL || `http://${host}:${port}`; // Detecta o domínio público da Railway
   console.log(`Servidor WebSocket rodando em: ${url}`);
 });
