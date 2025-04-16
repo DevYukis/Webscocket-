@@ -1,2 +1,5 @@
 # Ignorar arquivos de configuração e variáveis de ambiente
 .env
+
+# Ignorar a pasta node_modules
+node_modules/
