@@ -41,8 +41,9 @@ server.on('upgrade', (request, socket, head) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`Servidor WebSocket rodando na porta ${port}`);
+server.listen(port, '0.0.0.0', () => {
+  const host = process.env.HOST || 'localhost'; // Railway geralmente define o domínio automaticamente
+  console.log(`Servidor WebSocket rodando em: http://${host}:${port}`);
 });
 
 process.stdin.on('data', (data) => {
