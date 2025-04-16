@@ -42,8 +42,9 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 server.listen(port, '0.0.0.0', () => {
-  const host = process.env.HOST || 'localhost'; // Railway geralmente define o domínio automaticamente
-  console.log(`Servidor WebSocket rodando em: http://${host}:${port}`);
+  const host = process.env.HOST || `localhost`; // Railway define o domínio automaticamente
+  const url = process.env.RAILWAY_STATIC_URL || `http://${host}:${port}`; // Detecta o domínio público da Railway
+  console.log(`Servidor WebSocket rodando em: ${url}`);
 });
 
 process.stdin.on('data', (data) => {
