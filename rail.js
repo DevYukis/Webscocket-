@@ -108,7 +108,9 @@ server.on('upgrade', (request, socket, head) => {
 
 // Inicia o servidor
 server.listen(port, '0.0.0.0', () => {
+  const publicUrl = process.env.RAILWAY_STATIC_URL || `http://${ipAddress}:${port}`; // Usa o domínio público da Railway ou o IP local
   console.log(`Servidor rodando em: ${publicUrl}`);
+  console.log(`Acesse o domínio público (se disponível): ${process.env.RAILWAY_STATIC_URL || 'Não configurado'}`);
 });
 
 // Permite enviar mensagens do terminal para os clientes conectados
